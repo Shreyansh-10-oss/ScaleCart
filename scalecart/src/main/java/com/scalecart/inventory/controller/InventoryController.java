@@ -29,4 +29,18 @@ public class InventoryController {
 
         return inventoryService.getInventoryByProductId(productId);
     }
+    @PutMapping("/{productId}/add")
+    public InventoryResponse addStock(
+            @PathVariable Long productId,
+            @RequestParam Integer quantity) {
+
+        return inventoryService.addStock(productId, quantity);
+    }
+    @PutMapping("/{productId}/remove")
+    public InventoryResponse removeStock(
+            @PathVariable Long productId,
+            @RequestParam Integer quantity) {
+
+        return inventoryService.removeStock(productId, quantity);
+    }
 }

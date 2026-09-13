@@ -70,4 +70,39 @@ public class InventoryService {
                 inventory.getQuantity()
         );
     }
+
+    public InventoryResponse addStock(Long productId, Integer quantity) {
+
+        Inventory inventory = inventoryRepository
+                .findByProductId(productId)
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Inventory not found for product id: " + productId
+                        ));
+
+        inventory.setQuantity(inventory.getQuantity() + quantity);
+
+        Inventory updatedInventory = inventoryRepository.save(inventory);
+
+        return mapToResponse(updatedInventory);
+    }
+    public InventoryResponse removeStock(Long productId, Integer quantity) {
+
+        Inventory inventory = inventoryRepository
+                .findByProductId(productId)
+                .orElseThrow(() ->
+                        new RuntimeException(
+                                "Inventory not found for product id: " + productId
+                        ));
+
+        if (inventory.getQuantity() < quantity) {
+            throw new RuntimeException("Insufficient stock");
+        }
+
+        inventory.setQuantity(inventory.getQuantity() - quantity);
+
+        Inventory updatedInventory = inventoryRepository.save(inventory);
+
+        return mapToResponse(updatedInventory);
+    }
 }
