@@ -1,4 +1,4 @@
-package com.scalecart.entity;
+package com.scalecart.order.entity;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -1,6 +1,6 @@
-package com.scalecart.repository;
+package com.scalecart.order.repository;
 
-import com.scalecart.entity.Order;
+import com.scalecart.order.entity.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

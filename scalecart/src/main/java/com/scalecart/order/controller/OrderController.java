@@ -1,15 +1,15 @@
-package com.scalecart.controller;
+package com.scalecart.order.controller;
 
-import com.scalecart.dto.OrderRequest;
-import com.scalecart.dto.OrderResponse;
-import com.scalecart.service.OrderService;
+import com.scalecart.order.dto.OrderRequest;
+import com.scalecart.order.dto.OrderResponse;
+import com.scalecart.order.service.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import com.scalecart.dto.UpdateOrderRequest;
-import java.util.List;
+import com.scalecart.order.dto.UpdateOrderRequest;
+
 @RestController
 @RequestMapping("/api/orders")
 public class OrderController {

@@ -1,15 +1,14 @@
-package com.scalecart.service;
+package com.scalecart.order.service;
 
-import com.scalecart.dto.OrderRequest;
-import com.scalecart.dto.OrderResponse;
-import com.scalecart.entity.Order;
-import com.scalecart.repository.OrderRepository;
+import com.scalecart.order.dto.OrderRequest;
+import com.scalecart.order.dto.OrderResponse;
+import com.scalecart.order.entity.Order;
+import com.scalecart.order.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 import com.scalecart.exception.OrderNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import com.scalecart.dto.UpdateOrderRequest;
-import java.util.List;
+import com.scalecart.order.dto.UpdateOrderRequest;
 
 import java.time.LocalDateTime;
 

@@ -1,4 +1,4 @@
-package com.scalecart.dto;
+package com.scalecart.order.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

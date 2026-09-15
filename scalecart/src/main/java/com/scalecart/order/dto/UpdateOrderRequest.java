@@ -1,4 +1,4 @@
-package com.scalecart.dto;
+package com.scalecart.order.dto;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
