@@ -1,32 +1,40 @@
-package com.scalecart.inventory.entity;
+package com.scalecart.order.entity;
 
 import com.scalecart.product.entity.Product;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 @Entity
-@Table(name = "inventory")
-
-public class Inventory {
+@Table(name ="order_items")
+public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "product_id", nullable = false, unique = true)
+    @ManyToOne
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order order;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
     @Column(nullable = false)
     private Integer quantity;
 
-    @Version
     @Column(nullable = false)
-    private Long version;
+    private BigDecimal price;
 
-    public Long getVersion() {
-        return version;
-    }
     public Long getId() {
         return id;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public Product getProduct() {
@@ -43,5 +51,13 @@ public class Inventory {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }
