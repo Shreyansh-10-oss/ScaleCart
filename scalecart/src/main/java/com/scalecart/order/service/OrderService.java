@@ -7,6 +7,9 @@ import com.scalecart.order.entity.OrderItem;
 import com.scalecart.order.dto.OrderItemRequest;
 import org.springframework.transaction.annotation.Transactional;
 import com.scalecart.order.dto.OrderItemResponse;
+import com.scalecart.exception.ProductNotFoundException;
+import com.scalecart.exception.InventoryNotFoundException;
+import com.scalecart.exception.InsufficientStockException;
 
 import com.scalecart.order.dto.OrderRequest;
 import com.scalecart.order.dto.OrderResponse;
@@ -50,7 +53,7 @@ public class OrderService {
 
             Product product = productRepository.findById(itemRequest.getProductId())
                     .orElseThrow(() ->
-                            new RuntimeException(
+                            new ProductNotFoundException(
                                     "Product not found with id: "
                                             + itemRequest.getProductId()
                             )
@@ -59,7 +62,7 @@ public class OrderService {
             Inventory inventory = inventoryRepository
                     .findByProductIdForUpdate(itemRequest.getProductId())
                     .orElseThrow(() ->
-                            new RuntimeException(
+                            new InventoryNotFoundException(
                                     "Inventory not found for product id: "
                                             + itemRequest.getProductId()
                             )
@@ -68,14 +71,15 @@ public class OrderService {
             int requestedQuantity = itemRequest.getQuantity();
 
             if (inventory.getQuantity() < requestedQuantity) {
-                throw new RuntimeException("Insufficient stock");
+                throw new InsufficientStockException(
+                        "Insufficient stock for product id: "
+                                + itemRequest.getProductId()
+                );
             }
 
             inventory.setQuantity(
                     inventory.getQuantity() - requestedQuantity
             );
-
-            inventoryRepository.save(inventory);
 
             BigDecimal itemTotal = product.getPrice()
                     .multiply(BigDecimal.valueOf(requestedQuantity));
